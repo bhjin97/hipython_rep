@@ -72,6 +72,6 @@
 ## 🏁 앞으로의 계획
 
 **numpy, pandas 학습**
-numpy, pandas 학습과정을 통해 데이터 전처리 기술 습득
+- numpy, pandas 학습과정을 통해 데이터 전처리 기술 습득
 
 **SQL 학습**
