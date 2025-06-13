@@ -1,4 +1,4 @@
-# 💻 WhyNot 7기 소프트웨어 캠프 - 파이썬 실습 포트폴리오
+# ⏰ WhyNot 7기 소프트웨어 캠프 - 파이썬 실습 포트폴리오
 
 이 저장소는 WhyNot 7기 소프트웨어 캠프의 파이썬 교육과정 실습 및 팀 프로젝트 결과물을 정리한 포트폴리오입니다. 파이썬 기초문법부터 실전 프로젝트까지의 모든 과정이 체계적으로 정리되어 있습니다.
 
@@ -40,7 +40,10 @@
 - **Java Script**
 
   ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+- **css**
 
+   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+   
 ---
 
 ## 🚀 팀 프로젝트: 문구점 키오스크
@@ -77,7 +80,7 @@
 ### 🖼️ 실행 화면 예시
 (스크린샷 예: `kiosk_project/screenshot.png`)
 
-![kiosk ui sample](./kiosk_project/screenshot.png)
+![kiosk ui sample](./pencil.jpg)
 
 ### ▶️ 시연 영상 
 - 미구현
