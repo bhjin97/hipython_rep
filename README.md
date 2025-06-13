@@ -79,15 +79,18 @@
 ### 🔍 핵심 코드 스니펫
 
 ```python
-def get_order_input():
-    try:
-        choice = int(input("상품 번호를 입력하세요: "))
-        if choice not in range(1, len(product_list)+1):
-            raise ValueError("유효하지 않은 상품입니다.")
-        return choice
-    except ValueError as ve:
-        print("입력 오류:", ve)
-        return get_order_input()
+def add_qty():
+    while True:
+        qty = input('\t수량을 입력하세요(취소: x): ')
+        if qty.lower() =="x":
+            return qty
+        try:
+            qty = int(qty)
+            if qty > 0:
+                return qty
+            prt_alarm()
+        except ValueError:
+            prt_alarm()
 ```
 
 ---
