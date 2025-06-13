@@ -31,9 +31,15 @@
 
 ## 🛠 사용 기술 스택
 
-- **Python 3.12** ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=ffffff)
-- **HTML**![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=ffffff)
-- **Java Script**![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+- **Python 3.12**
+
+  ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=ffffff)
+- **HTML**
+
+  ![HTML5](https://img.shields.io/badge/HTML5-E34F26?logo=html5&logoColor=ffffff)
+- **Java Script**
+
+  ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
 
 ---
 
