@@ -79,18 +79,31 @@
 ### 🔍 핵심 코드 스니펫
 
 ```python
-def add_qty():
+def prt_points():
     while True:
-        qty = input('\t수량을 입력하세요(취소: x): ')
-        if qty.lower() =="x":
-            return qty
-        try:
-            qty = int(qty)
-            if qty > 0:
-                return qty
+        ab = input('포인트를 적립하시겠습니까? (y/n): ')
+        if ab.lower() not in ['y', 'n']:
             prt_alarm()
-        except ValueError:
-            prt_alarm()
+            continue
+        elif ab.lower()=='n':
+            return        
+        else:
+            while True:
+                phone = input('전화번호를 입력해 주세요: ')
+                if not phone.isdigit() or len(phone) < 11 or phone == "x":
+                    prt_alarm()
+                    continue                       
+                user_id = f'user_{phone[-4:]}'
+                point = int(total * 0.05)                 
+                if user_id in points :
+                    points[user_id] += point
+                else :
+                    points[user_id] = point
+                print('='*44)
+                print(f'🎁{user_id}고객님, {point}점 적립 되었습니다!🎁')
+                print(f' 고객님의 총 적립포인트는 {points[user_id]:,}점 입니다!')
+                print('='*44)
+                return
 ```
 
 ---
