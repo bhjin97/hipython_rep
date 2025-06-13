@@ -53,6 +53,44 @@
 
 ---
 
+## 🎯 프로젝트 결과물: 문구점 키오스크
+
+### 📌 프로젝트 요약
+- **프로젝트명**: 문구점 키오스크 시스템
+- **팀원 수**: 4명
+- **역할**: 주문 로직 구현 (조건문 + 예외처리 함수 설계)
+
+### 💡 주요 기능
+- 상품 메뉴 출력
+- 사용자 입력 기반 상품 선택 및 수량 입력
+- 입력 오류 처리 (문자/빈칸 등)
+- 메뉴로 되돌아가기
+- 포인트 적립 및 누적포인트 출력
+- 최종 결제 금액 출력
+
+### 🖼️ 실행 화면 예시
+(스크린샷 예: `kiosk_project/screenshot.png`)
+
+![kiosk ui sample](./kiosk_project/screenshot.png)
+
+### ▶️ 시연 영상 
+- 미구현
+
+### 🔍 핵심 코드 스니펫
+
+```python
+def get_order_input():
+    try:
+        choice = int(input("상품 번호를 입력하세요: "))
+        if choice not in range(1, len(product_list)+1):
+            raise ValueError("유효하지 않은 상품입니다.")
+        return choice
+    except ValueError as ve:
+        print("입력 오류:", ve)
+        return get_order_input()
+
+---
+
 ## 🌱 나의 성장 과정
 
 **기초에서 실전까지**
@@ -66,6 +104,16 @@
 
 **코드 리뷰 역량**
 - 다른 팀원들의 코드 흐름을 이해하고 피드백을 주고받으며 더 나은 구조를 고민하게 됨
+
+---
+
+## ✅ To-Do List
+
+- [x] GITHUB의 READ.ME 수정
+- [x] NUMPY 배열, 연산 학습
+- [ ] 블로그에 학습과정 정리
+- [ ] NUMPY 인덱싱,슬라이스 학습
+- [ ] PANDAS 예습
 
 ---
 
