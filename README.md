@@ -32,6 +32,7 @@
 ## 🛠 사용 기술 스택
 
 - **Python 3.10**
+- ![Python](https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=ffffff)
 - 텍스트 기반 UI (CLI)
 - 기본 내장 라이브러리: `os`, `sys`, `time` 등
 
