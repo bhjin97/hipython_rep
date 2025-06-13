@@ -77,7 +77,7 @@
 ### 🖼️ 실행 화면 예시
 (스크린샷 예: `kiosk_project/screenshot.png`)
 
-![kiosk ui sample](./kiosk_project/screenshot.png)
+![kiosk ui sample](./pencil.jpg)
 
 ### ▶️ 시연 영상 
 - 미구현
