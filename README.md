@@ -87,7 +87,7 @@ def get_order_input():
         return choice
     except ValueError as ve:
         print("입력 오류:", ve)
-        return get_order_input()
+        return get_order_input()```
 
 ---
 
