@@ -40,7 +40,10 @@
 - **Java Script**
 
   ![JavaScript](https://img.shields.io/badge/JavaScript-F7DF1E?logo=javascript&logoColor=black)
+- **css**
 
+   <img src="https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white" />
+   
 ---
 
 ## 🚀 팀 프로젝트: 문구점 키오스크
