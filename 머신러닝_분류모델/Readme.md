@@ -38,7 +38,7 @@
 - 고객 ID + `gender` 컬럼 포함
 - `gender`: `'Male'`, `'Female'` → `LabelEncoder`로 숫자 변환됨
 
-> ⚠️ 대용량 파일(`creditcard.csv`)은 `.gitignore`에 포함되어 Git 저장소에서 제외됩니다.
+-  ⚠️ 데이터 출처: 한국데이터산업진흥원 빅데이터분석기사 실기 공개 예시 문항
 
 ---
 
@@ -50,6 +50,7 @@
 
 ### 📌 Step 2. 데이터 전처리
 - `cust_id` 컬럼 제거
+- '환불금액'의 결측치 처리 -> 0으로 대체
 - `gender` → 숫자로 인코딩 (`LabelEncoder`)
 - **ColumnTransformer 사용**  
   - 수치형 → `StandardScaler`  
