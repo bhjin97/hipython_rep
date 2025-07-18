@@ -66,7 +66,7 @@
 ### ✔️ 사용 모델
 - `DecisionTreeClassifier`
 - `LogisticRegression`
-- `RandomForestClassifier`
+- `RandomForestClassifier` → `GridSearchCV`로 **하이퍼파라미터 튜닝**
 - `XGBClassifier` → `GridSearchCV`로 **하이퍼파라미터 튜닝**
 
 ### 🧾 결과 평가
@@ -74,9 +74,12 @@
 - `accuracy_score`
 - `confusion_matrix`
 
+- RandomForestClassifier 모델 최적화: GridSearchCV를 사용하여 RandomForestClassifier 모델의 최적 파라미터를 탐색했습니다.
+
+최적 파라미터: {'max_depth': 11, 'min_samples_split': 20}
+최고 성능 (정확도): 0.6614
+
 모든 결과는 **콘솔 출력**을 통해 확인 가능
 
----
 
-## 📁 6. 데이터 & 파일 구조 예시
 
