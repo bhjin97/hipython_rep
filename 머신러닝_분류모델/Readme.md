@@ -1,4 +1,4 @@
-# 🧠 고객 성별 분류 모델 (Customer Gender Classification Model)
+# 🎲 고객 성별 분류 모델 (Customer Gender Classification Model)
 
 ---
 
@@ -37,7 +37,7 @@
 ### 🔸 `y.csv` (종속 변수)
 - 고객 ID 컬럼 제거 후 타겟
 
--  ⚠️ 데이터 출처: 한국데이터산업진흥원 빅데이터분석기사 실기 공개 예시 문항
+  ⚠️ 데이터 출처: 한국데이터산업진흥원 빅데이터분석기사 실기 공개 예시 문항
 
 ---
 
