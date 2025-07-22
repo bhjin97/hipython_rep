@@ -1,4 +1,5 @@
 # 1. 프로젝트 개요 | 자전거 대여량 예측 🚲 
+<img width="1536" height="1024" alt="bike_pred1" src="https://github.com/user-attachments/assets/7259f01d-c8b4-4970-8e4a-f9c58ed6e790" />
 
 ## 📌 프로젝트 명
 **자전거 대여량 예측 모델 개발**
