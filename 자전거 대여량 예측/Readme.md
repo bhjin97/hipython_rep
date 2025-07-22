@@ -85,3 +85,86 @@
 - 일부 변수는 분포가 왜곡되어 있어 **로그 변환** 등의 전처리 고려 필요
 - 'count'와 독립변수들 간의 상관관계를 파악
 
+# 3. 탐색적 데이터 분석 | Exploratory Data Analysis (EDA) 🔍 
+
+EDA는 자전거 대여 수요(`count`)에 영향을 미칠 수 있는 다양한 요인을 시각화하고,  
+변수 간 관계와 패턴을 이해하여 향후 모델링 전략의 방향을 설정하는 단계이다.
+
+---
+
+## 1️⃣ 타겟 변수 (`count`)의 분포
+
+- `count`는 전반적으로 **오른쪽으로 치우친 분포(skewed)**를 가짐
+- **로그 변환 (`log1p`)이 필요한 이유**:
+  - 고대여량에 의한 왜곡 방지
+  - 선형 회귀 모델의 가정 만족
+
+> 📊 시각화: `sns.histplot(tr_df['count'], bins=50)`
+> 📊 비교: `sns.histplot(np.log1p(tr_df['count']), bins=50)`
+
+---
+
+## 2️⃣ 시간대별 대여량 분석 (`hour`)
+
+- `datetime`에서 추출한 `hour`별로 대여 수요가 극명하게 나뉨
+- **출퇴근 시간(8시, 17~18시)에 수요 급증**
+- `workingday`와 결합하면 더욱 뚜렷한 패턴 확인 가능
+
+> 📊 `sns.boxplot(x='hour', y='count', data=tr_df)`
+> 📊 `sns.boxplot(x='hour', y='count', hue='workingday', data=tr_df)`
+
+---
+
+## 3️⃣ 요일/주말/공휴일의 영향
+
+- `dayofweek`에 따라 수요가 다르게 나타남
+  - 평일: 출퇴근 수요
+  - 주말: 레저 수요
+- `holiday=1`인 날은 전체적으로 수요가 감소하는 경향
+
+> 📊 `sns.boxplot(x='dayofweek', y='count', data=tr_df)`
+> 📊 `sns.boxplot(x='holiday', y='count', data=tr_df)`
+
+---
+
+## 4️⃣ 계절 및 날씨 요인의 영향
+
+- **계절(`season`)별**로 뚜렷한 대여량 차이 존재
+- **날씨(`weather`)가 흐릴수록** 대여량 감소
+- **온도(`temp`)와 체감온도(`atemp`)는 대체로 양의 상관관계**
+
+> 📊 `sns.boxplot(x='season', y='count', data=tr_df)`
+> 📊 `sns.boxplot(x='weather', y='count', data=tr_df)`
+> 📈 `sns.scatterplot(x='temp', y='count', data=tr_df)`
+> 📈 `sns.scatterplot(x='humidity', y='count', data=tr_df)`
+
+---
+
+## 5️⃣ 풍속(`windspeed`)의 이상치 확인
+
+- 풍속이 **0인 데이터가 과도하게 많음**  
+  → 측정 오류 or 결측 대체값으로 추정 가능
+- IQR 기준으로도 이상치 존재
+
+> 📊 `sns.boxplot(y='windspeed', data=tr_df)`
+> 🧠 처리 전략은 전처리 파트에서 논의
+
+---
+
+## 6️⃣ 변수 간 상관 관계 분석
+
+- `temp`, `atemp`, `count`는 **양의 상관관계**
+- `humidity`와 `count`는 **약한 음의 상관관계**
+- `registered`, `count`는 매우 강한 상관관계 (train 전용)
+
+> 📊 `sns.heatmap(tr_df.corr(), annot=True, cmap='coolwarm')`
+
+---
+
+## 🧠 EDA 요약 인사이트
+
+- 대여량은 **시간대, 날씨, 요일, 온도**에 크게 영향을 받는다.
+- `datetime`에서 파생된 `hour`는 핵심 변수이다.
+- 일부 변수는 로그 변환 및 범주형 변환이 필요하다.
+- 풍속은 이상치 또는 데이터 오류 가능성이 있어 별도 처리 필요.
+
