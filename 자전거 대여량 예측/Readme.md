@@ -73,7 +73,7 @@
 
 - `count` 평균: 약 191
 - 최대값: 977 / 최소값: 1
-- `windspeed`: 0 값 다수 존재 → 이상치 또는 센서 오류 가능성
+- `windspeed`: 이상치 또는 센서 오류 가능성
 - `casual + registered = count` 관계 존재
 
 
@@ -272,7 +272,6 @@ EDA는 자전거 대여 수요(`count`)에 영향을 미칠 수 있는 다양한
 
 ```python
 y_train = np.log1p(train_df['count'])
-y_test = np.log1p(test_df['count'])
 ```
 
 
@@ -310,21 +309,17 @@ r2 = r2_score(actual, pred)
 
 | 모델 | Degree | RMSE | R² |
 |------|--------|------|----|
-| Linear | 1 | 135.2 |  |
-| Polynomial + Ridge | 2 |  |  |
-| Polynomial + Lasso | 2 |  |  |
-| Polynomial + RandomForest | 2 | |  |
-| Polynomial + XGBoost | 2 |  |  |
+| Linear | 2 | 128.5 | 0.5 |
+| Polynomial + RandomForest | 2 |45.805 | 0.951 |
+| Polynomial + XGBoost | 2 | 45.37 | 0.938 |
 
 > ✅ 트리 기반 모델(RandomForest, XGBoost)은 비선형성과 변수 간 상호작용을 잘 학습하며 성능이 뛰어났습니다.  
-> ✅ Lasso는 변수 선택 효과를 통해 불필요한 피처 제거에 유리했습니다.
 
 
 
 ## 🧠 인사이트
 
-- 단순 선형 회귀는 자전거 수요의 복잡한 패턴을 설명하기에 한계가 존재함
-- 다항 특성 확장과 정규화를 통해 선형 계열 모델도 일부 성능 개선 가능
+- 다항 선형 회귀는 자전거 수요의 복잡한 패턴을 설명하기에 한계가 존재함
 - 트리 기반 모델은 비선형성과 다중 조건을 반영해 예측 성능이 우수함
 - 로그 변환은 분포 안정화, 이상치 완화에 크게 기여함
 
