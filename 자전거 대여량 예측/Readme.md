@@ -307,7 +307,7 @@ r2 = r2_score(actual, pred)
 | 모델 | Degree | RMSE | R² |
 |------|--------|------|----|
 | Linear | 2 | 128.5 | 0.5 |
-| Polynomial + RandomForest | 2 |45.805 | 0.951 |
+| **Polynomial + RandomForest** | 2 |45.805 |**0.951** |
 | Polynomial + XGBoost | 2 | 45.37 | 0.938 |
 
 > ✅ 트리 기반 모델(RandomForest, XGBoost)은 비선형성과 변수 간 상호작용을 잘 학습하며 성능이 뛰어났습니다.  
