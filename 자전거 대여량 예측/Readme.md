@@ -259,3 +259,73 @@ EDA는 자전거 대여 수요(`count`)에 영향을 미칠 수 있는 다양한
 - RMSLE는 로그 변환된 타깃에 가장 적합한 평가 지표로 사용
 - 향후 교차 검증, 모델 앙상블, 시계열 특화 모델로 확장 가능
 
+
+# 6. 모델 학습 및 평가
+
+자전거 대여량(`count`)은 시간, 날씨, 요일 등 다양한 요인과 비선형적인 관계를 갖고 있어,  
+여러 회귀 모델을 적용하여 성능을 비교하였습니다.
+
+
+## 🔄 타깃 변수 전처리
+
+- `count`의 분포가 치우쳐져 있어, **로그 변환**을 통해 모델의 예측 안정성을 확보했습니다.
+
+```python
+y_train = np.log1p(train_df['count'])
+y_test = np.log1p(test_df['count'])
+```
+
+
+## 🧪 적용한 회귀 모델
+
+| 모델 | 설명 |
+|------|------|
+| **Linear Regression** | 단순 선형 회귀 |
+| **Polynomial Regression** | PolynomialFeatures + LinearRegression |
+| **Ridge Regression** | L2 정규화 선형 회귀 |
+| **Lasso Regression** | L1 정규화로 변수 선택 효과 |
+| **Random Forest** | 비선형 결정 트리 앙상블 |
+| **XGBoost** | Gradient Boosting 기반의 회귀 모델 |
+
+
+## 📋 모델 평가 방식
+
+- 예측값은 로그 복원을 적용: `np.expm1()` 사용
+- 평가 지표:
+  - **RMSE** (Root Mean Squared Error)
+  - **R²** (결정계수)
+
+```python
+pred_log = model.predict(X_test)
+pred = np.expm1(pred_log)           # 로그 복원
+actual = np.expm1(y_test)
+
+rmse = np.sqrt(mean_squared_error(actual, pred))
+r2 = r2_score(actual, pred)
+```
+
+
+
+## 📊 성능 비교 예시
+
+| 모델 | Degree | RMSE | R² |
+|------|--------|------|----|
+| Linear | 1 | 135.2 | 0.28 |
+| Polynomial + Ridge | 2 | 127.5 | 0.36 |
+| Polynomial + Lasso | 2 | 125.7 | 0.38 |
+| Polynomial + RandomForest | 2 | 96.1 | 0.69 |
+| Polynomial + XGBoost | 2 | 88.6 | 0.76 |
+
+> ✅ 트리 기반 모델(RandomForest, XGBoost)은 비선형성과 변수 간 상호작용을 잘 학습하며 성능이 뛰어났습니다.  
+> ✅ Lasso는 변수 선택 효과를 통해 불필요한 피처 제거에 유리했습니다.
+
+
+
+## 🧠 인사이트
+
+- 단순 선형 회귀는 자전거 수요의 복잡한 패턴을 설명하기에 한계가 존재함
+- 다항 특성 확장과 정규화를 통해 선형 계열 모델도 일부 성능 개선 가능
+- 트리 기반 모델은 비선형성과 다중 조건을 반영해 예측 성능이 우수함
+- 로그 변환은 분포 안정화, 이상치 완화에 크게 기여함
+
+
