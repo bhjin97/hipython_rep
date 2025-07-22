@@ -71,12 +71,9 @@
 
 ## 🧮 간단한 통계 정보
 
-> (※ 예시로 설명, 실제 데이터프레임의 `describe()` 결과로 대체 가능)
-
 - `count` 평균: 약 191
 - 최대값: 977 / 최소값: 1
 - `windspeed`: 0 값 다수 존재 → 이상치 또는 센서 오류 가능성
-- `season`, `weather` 등은 숫자형이지만 범주형 처리 필요
 - `casual + registered = count` 관계 존재
 
 ---
@@ -86,4 +83,5 @@
 - `datetime`은 **다양한 시간 정보(hour, dayofweek 등)**로 파생 가능
 - `registered`, `casual`은 **train에만 존재**하므로 test셋에는 사용 불가 → `count`만 예측 대상
 - 일부 변수는 분포가 왜곡되어 있어 **로그 변환** 등의 전처리 고려 필요
+- 'count'와 독립변수들 간의 상관관계를 파악
 
