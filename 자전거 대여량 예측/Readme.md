@@ -306,15 +306,15 @@ r2 = r2_score(actual, pred)
 
 
 
-## 📊 성능 비교 예시
+## 📊 성능 비교 
 
 | 모델 | Degree | RMSE | R² |
 |------|--------|------|----|
-| Linear | 1 | 135.2 | 0.28 |
-| Polynomial + Ridge | 2 | 127.5 | 0.36 |
-| Polynomial + Lasso | 2 | 125.7 | 0.38 |
-| Polynomial + RandomForest | 2 | 96.1 | 0.69 |
-| Polynomial + XGBoost | 2 | 88.6 | 0.76 |
+| Linear | 1 | 135.2 |  |
+| Polynomial + Ridge | 2 |  |  |
+| Polynomial + Lasso | 2 |  |  |
+| Polynomial + RandomForest | 2 | |  |
+| Polynomial + XGBoost | 2 |  |  |
 
 > ✅ 트리 기반 모델(RandomForest, XGBoost)은 비선형성과 변수 간 상호작용을 잘 학습하며 성능이 뛰어났습니다.  
 > ✅ Lasso는 변수 선택 효과를 통해 불필요한 피처 제거에 유리했습니다.
