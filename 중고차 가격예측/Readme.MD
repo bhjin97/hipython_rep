@@ -53,6 +53,29 @@
 - 중복 또는 예측에 불필요한 정보: `company`, `model`, `motors_trim`, `date_posted` 등
 - 평균 가격으로 이미 반영된 변수 제거
 
+
+### 🧾 최종 학습용 컬럼 설명
+
+
+| 컬럼명                      | 설명 |
+|----------------------------|------|
+| `kilometers`               | 주행거리 (원본 값) |
+| `body_condition`           | 차량 외관 상태 |
+| `mechanical_condition`     | 차량 기계 상태 |
+| `seller_type`              | 판매자 유형 |
+| `body_type`                | 차량 바디타입 |
+| `transmission_type`        | 변속기 유형 |
+| `fuel_type`                | 연료 종류 |
+| `steering_side`            | 운전석 위치 |
+| `color`                    | 차량 색상 |
+| `cyl_grouped`              | 통합된 실린더 수 |
+| `hp_group`                 | 통합된 마력 그룹 |
+| `is_high_outlier_month`    | 이상치 집중 월 여부 (4, 5, 12월) |
+| `is_recent_year`           | 최근 연식 차량 여부 |
+| `year_price_dev`           | 차량 연식별 평균 가격과의 차이 |
+
+
+
 ---
 
 ## 5. 🧪 모델링 및 평가
