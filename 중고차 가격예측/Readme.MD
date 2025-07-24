@@ -1,6 +1,6 @@
 # 🚗 중고차 가격 예측 프로젝트
 
-
+<img src="https://github.com/bhjin97/hipython_rep/blob/main/%EC%A4%91%EA%B3%A0%EC%B0%A8%20%EA%B0%80%EA%B2%A9%EC%98%88%EC%B8%A1/data/%EC%A4%91%EA%B3%A0%EC%B0%A8%EA%B0%80%EA%B2%A9%EC%98%88%EC%B8%A1.png">
 
 이 프로젝트는 다양한 차량 정보를 기반으로 중고차의 가격을 예측하기 위해 머신러닝 모델을 적용한 분석 사례입니다. 데이터 전처리, 파생 변수 생성, 이상치 처리, 모델링, 평가 등의 전 과정을 포함합니다.
 
