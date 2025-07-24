@@ -17,7 +17,8 @@
 ### ✅ 결측치 처리
 
 - `horsepower`: 문자열 → 숫자 변환 (`400-500 HP` → 평균값), 'unknown'은 제거 또는 그룹 평균으로 대체
-- `no_of_cylinders`: 문자열 → 숫자 변환 → 그룹화 (`5기통 → 4`, `10기통 → 12`)
+- 'title' : 이미 컬럼에 중복되는 정보 많다고 판단하여 제거
+- `no_of_cylinders`: 문자열 → 숫자 변환 → 그룹화 (`3, 4, 5기통 → 4`, `10기통 → 12` 등)
 - `year`, `motors_trim` 등은 그룹 평균 또는 삭제 여부 검토 후 처리
 
 ### ✅ 이상치 탐지 및 처리
@@ -40,7 +41,6 @@
 - `company_model_avg_price`: 브랜드-모델 평균 가격
 - `body_type_median_price`: 바디타입별 가격 중앙값
 - `mechanical_condition_median_price`: 상태별 가격 중앙값
-- `year_price_dev`: 차량 연식 대비 가격 편차
 - `is_recent_year`, `is_high_outlier_month` 등 이진 파생 변수
 
 ---
