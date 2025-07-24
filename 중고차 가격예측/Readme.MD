@@ -1,4 +1,4 @@
-# 🚗 중고차 가격 예측 프로젝트
+# 🚗 중고차 가격 예측 프로젝트 🚙
 
 <img src="https://github.com/bhjin97/hipython_rep/blob/main/%EC%A4%91%EA%B3%A0%EC%B0%A8%20%EA%B0%80%EA%B2%A9%EC%98%88%EC%B8%A1/data/%EC%A4%91%EA%B3%A0%EC%B0%A8%EA%B0%80%EA%B2%A9%EC%98%88%EC%B8%A1.png">
 
