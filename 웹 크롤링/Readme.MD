@@ -44,7 +44,6 @@ MySQL 데이터베이스에 저장하는 Python 기반 자동화 스크립트입
 pip install requests beautifulsoup4 pillow selenium webdriver-manager pymysql
 ```
 
----
 
 ### 2. MySQL 데이터베이스 준비
 
@@ -55,7 +54,6 @@ pip install requests beautifulsoup4 pillow selenium webdriver-manager pymysql
 CREATE DATABASE Webull_trade CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
 ```
 
----
 
 ### 3. Python 스크립트 실행
 
@@ -71,15 +69,12 @@ python webull_crawler.py
 > - SQLite DB와 CSV 파일 저장
 > - MySQL (`Webull_trade`) DB에 테이블 생성 및 데이터 저장
 
----
-
 ### 4. 결과 확인
 
 - **CSV** 파일: `webull_stocks.csv`  
 - **SQLite** 파일: `webull_stocks.db`  
 - **MySQL** 테이블: `stocks` (Webull_trade 데이터베이스 내부)
 
----
 
 ### 5. 출력 예시
 
@@ -90,7 +85,6 @@ python webull_crawler.py
 MySQL 저장 완료 
 ```
 
----
 
 ### 6. 참고 사항
 
@@ -99,7 +93,6 @@ MySQL 저장 완료
 - `headless` 옵션으로 브라우저를 띄우지 않고 실행 가능
 - MySQL 연동 시 사용자 계정 정보와 포트를 상황에 맞게 수정하세요
 
----
 
 ---
 
