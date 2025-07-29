@@ -7,7 +7,7 @@ MySQL 데이터베이스에 저장하는 Python 기반 자동화 스크립트입
 
 ## 🔧 사용 기술
 
-- **언어**: Python 3.x  
+- **언어**: Python 3.10.18 
 - **라이브러리**:
   - `requests`, `BeautifulSoup` (크롤링)
   - `pymysql` (MySQL 연동)
