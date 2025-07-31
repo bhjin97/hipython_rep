@@ -1,3 +1,4 @@
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
@@ -15,7 +16,7 @@ downloads/
 eggs/
 .eggs/
 lib/
-lib64/
+a03lib64/
 parts/
 sdist/
 var/
@@ -174,3 +175,6 @@ cython_debug/
 
 # PyPI configuration file
 .pypirc
+=======
+.ipynb_checkpoints/
+>>>>>>> 8e10a12 (Upload hello_pyspark notebook)
