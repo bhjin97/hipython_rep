@@ -77,6 +77,15 @@ txt2 = st.text_input('비밀번호', placeholder='비번 입력하세요')
 st.text(f'텍스트 입력 결과 : {txt1}, {txt2}')
 
 # 파일 업로더
+# 업로드한 파일은 사용자의 세션에 있습니다 -> 화면을 갱신하면 사라짐
+# 서버에 저장하려면 별도로 구현
+# 데이터베이스에 저장하는 로직도 구현가능
 st.file_uploader(
     '파일 선택', type='csv', accept_multiple_files=False
 )
+if file is not None:
+    df = pd.read_csv(file)
+    st.write(df)
+    
+    with open(file.name, 'wb') as out:
+        out.write(file.getbuffer())
