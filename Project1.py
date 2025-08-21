@@ -12,23 +12,133 @@ st.title('심리상담 서비스 츄러스~미!')
 img = Image.open('./data/츄러스미.png')
 album_img = Image.open('./data/sabrina.jfif')
 
+############################# 랜덤 데이터 생성 ############################
+rng = np.random.default_rng(42)
+
+# -------------------------------
+# 1) 기간/시간 축
+# -------------------------------
+dates = pd.date_range("2025-07-23", periods=30, freq="D")  # 최근 30일
+hours = np.arange(24)
+
+# -------------------------------
+# 2) 시간대별 기본 사용 패턴(분 단위의 '기대값' 스케치)
+#    - 새벽 극저, 아침-출근 약간 상승, 점심 하락, 저녁 피크
+# -------------------------------
+base_profile = np.array([
+    1, 1, 1, 1,         # 00-03
+    2, 3, 5,            # 04-06
+    8, 10,              # 07-08
+    12, 10,             # 09-10
+    7,  6,              # 11-12 (점심 하락)
+    7,  8,  9,          # 13-15
+    10, 12,             # 16-17
+    15, 20, 18, 14,     # 18-21 (저녁 피크 20시)
+    10, 6               # 22-23
+], dtype=float)
+
+# sanity: 길이 24여야 함
+assert len(base_profile) == 24
+
+# -------------------------------
+# 3) 요일 효과
+#    - 평일: 기본
+#    - 주말: 낮(10-17시) 0.8x, 저녁(18-23시) 1.1x
+# -------------------------------
+def weekend_multiplier(hour):
+    if 10 <= hour <= 17:
+        return 0.8
+    if 18 <= hour <= 23:
+        return 1.1
+    return 1.0
+
+# -------------------------------
+# 4) 일자별 컨디션/변동 (로그정규로 스케일링)
+# -------------------------------
+daily_scale = {d: rng.lognormal(mean=0.0, sigma=0.35) for d in dates}
+
+# -------------------------------
+# 5) 데이터 합성
+#    - 기대값 * (요일/주말 보정) * 일자 스케일 + 감마 노이즈
+#    - 일부 시간대는 완전 미사용(0분)로 드랍아웃
+# -------------------------------
+rows = []
+for d in dates:
+    is_weekend = d.weekday() >= 5  # 5=토, 6=일
+    for h in hours:
+        mu = base_profile[h]
+
+        # 주말 보정
+        if is_weekend:
+            mu *= weekend_multiplier(h)
+
+        # 일자 스케일링
+        mu *= daily_scale[d]
+
+        # 감마 노이즈(양의 연속값, 분 단위로 자연스럽게 튐)
+        # shape-k, scale-theta (기대값 = k*theta). 여기선 평균 근처로 약간 흔들리게 설정
+        noise = rng.gamma(shape=2.0, scale=mu / max(mu, 1) * 0.6) if mu > 0 else 0.0
+
+        minutes = mu + noise
+
+        # 드랍아웃(해당 시간대 완전 미사용): 밤/이른새벽은 확률 높게
+        dropout_p = 0.25 if h in [0,1,2,3,4] else (0.10 if 10 <= h <= 17 else 0.15)
+        if rng.random() < dropout_p:
+            minutes = 0.0
+
+        # 물리적 상한/하한(한 시간에 0~60분)
+        minutes = int(np.clip(minutes, 0, 60))
+
+        rows.append([d.date(), int(h), minutes])
+
+df = pd.DataFrame(rows, columns=["date", "hour", "minutes"])
+
+# -------------------------------
+# 6) 현실감 점검(선택): 일/주간 합계 통계
+# -------------------------------
+# print(df.groupby('date')['minutes'].sum().describe())
+# print(df.groupby('hour')['minutes'].mean().round(1))
+
+#################### 감정분포 데이터 ###################
+np.random.seed(42)
+emotions = ["기쁨", "슬픔", "분노", "불안", "놀람", "혐오"]
+scores = np.random.randint(3, 10, size=len(emotions))
+df_radar = pd.DataFrame({
+    "emotion": emotions,
+    "score": scores
+})
+######################################################################
+
+
 # tab 함수 만들기
 def main_tab():
     st.header('Tab Menu')
-    tab1, tab2, tab3 = st.tabs(['이용시간','컨텐츠 이용비율','스크린 타임 설정'])
+    tab1, tab2, tab3 = st.tabs(['이용시간','감정 분포','스크린 타임 설정'])
     with tab1:
         st.subheader('이용시간')
-        st.bar_chart({'데이터':[1,2,3,4,5]})
+        st.markdown("**시간대별 사용 히트맵**")
+        pivot = df.pivot_table(index="date", columns="hour", values="minutes", aggfunc="sum", fill_value=0)
+        fig_heat = px.imshow(
+            pivot,
+            labels=dict(x="시간", y="날짜", color="분"),
+            aspect="auto",
+            color_continuous_scale="Purples",
+        )
+        fig_heat.update_layout(margin=dict(l=10, r=10, t=30, b=10), height=300)
+        st.plotly_chart(fig_heat, use_container_width=True)
 
     with tab2:
-        st.subheader('컨텐츠 이용비율')
-        st.bar_chart({'기준': ['a','b','c','d','e'],'값':[1,2,3,4,5]})
+        st.subheader('감정 분포')
+        fig_radar = px.line_polar(df_radar, r="score", theta="emotion", line_close=True)
+        fig_radar.update_traces(fill='toself')
+        fig_radar.update_layout(margin=dict(l=10, r=10, t=30, b=10), height=340)
+        st.plotly_chart(fig_radar, use_container_width=True)
         
     # 3번째 탭 : 체크박스 (활성화여부), 슬라이더 (업데이트 주기sec)
     with tab3:
         st.subheader('Screen Time')
         ch_v = st.checkbox("사용시간 설정")
-        st.slider("사용시간", 1,23,2, disabled=ch_v)
+        st.slider("사용시간", 1,23,2, disabled= not ch_v)
 
 st.set_page_config(
     page_title="사용자 대시보드",
@@ -42,7 +152,7 @@ with st.sidebar:
         st.write('우리 서비스의 마스코트 캐릭터')
     st.header("사이드 메뉴")
     selected_menu = st.selectbox(
-        '메뉴관리', 
+        '페이지 선택', 
         options=['메인 페이지', '채팅하기', '나의 컨텐츠', '설정']
     )
     chk_fnt= st.checkbox('폰트 크기 조정')
