@@ -100,8 +100,8 @@ df = pd.DataFrame(rows, columns=["date", "hour", "minutes"])
 # print(df.groupby('hour')['minutes'].mean().round(1))
 
 #################### 감정분포 데이터 ###################
-np.random.seed(42)
-emotions = ["기쁨", "슬픔", "분노", "불안", "놀람", "혐오"]
+np.random.seed(30)
+emotions = ["기쁨", "슬픔", "분노", "불안", "놀람", "평온"]
 scores = np.random.randint(3, 10, size=len(emotions))
 df_radar = pd.DataFrame({
     "emotion": emotions,
@@ -205,7 +205,7 @@ elif selected_menu == '나의 컨텐츠':
 
 ### 채팅 화면 구성
 elif selected_menu == '채팅하기':
-    st.subheader('Chat')
+    st.subheader('Chat - 아래의 서비스를 이용하세요!')
     # user_input = st.text_input('채팅을 입력하세요')
     # if st.button('전송하기', icon='📤'):
         # st.write(" 당신의 입력:", user_input)
@@ -237,5 +237,5 @@ else:
         
     mdata = st.checkbox('마케팅 및 맟춤서비스 알람 동의')
     if mdata:
-        st.text('마케팅 및 맟춤서비스 알람 수신을 동의 하셨습니다')
+        st.text('마케팅 및 맟춤서비스 알람 수신을 동의하셨습니다')
         
