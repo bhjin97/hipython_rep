@@ -12,6 +12,24 @@ st.title('심리상담 서비스 츄러스~미!')
 img = Image.open('./data/츄러스미.png')
 album_img = Image.open('./data/sabrina.jfif')
 
+# tab 함수 만들기
+def main_tab():
+    st.header('Tab Menu')
+    tab1, tab2, tab3 = st.tabs(['이용시간','컨텐츠 이용비율','스크린 타임 설정'])
+    with tab1:
+        st.subheader('이용시간')
+        st.bar_chart({'데이터':[1,2,3,4,5]})
+
+    with tab2:
+        st.subheader('컨텐츠 이용비율')
+        st.bar_chart({'기준': ['a','b','c','d','e'],'값':[1,2,3,4,5]})
+        
+    # 3번째 탭 : 체크박스 (활성화여부), 슬라이더 (업데이트 주기sec)
+    with tab3:
+        st.subheader('Screen Time')
+        ch_v = st.checkbox("사용시간 설정")
+        st.slider("사용시간", 1,23,2, disabled=ch_v)
+
 st.set_page_config(
     page_title="사용자 대시보드",
     page_icon="👤",
@@ -47,7 +65,7 @@ if selected_menu == '메인 페이지':
         view_mode = st.radio('보기', ['간단','상세'], horizontal=True)
     with col_f3:
         st.caption("필터를 변경하면 아래 위젯들이 갱신됩니다.")
-        
+    main_tab()
 ### 컨텐츠 화면 구성
 elif selected_menu == '나의 컨텐츠':
     st.subheader('My Contents')
