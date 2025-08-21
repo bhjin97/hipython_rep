@@ -175,6 +175,7 @@ if selected_menu == '메인 페이지':
         view_mode = st.radio('보기', ['간단','상세'], horizontal=True)
     with col_f3:
         st.caption("필터를 변경하면 아래 위젯들이 갱신됩니다.")
+    # 탭 함수임
     main_tab()
 ### 컨텐츠 화면 구성
 elif selected_menu == '나의 컨텐츠':
@@ -205,7 +206,12 @@ elif selected_menu == '나의 컨텐츠':
 ### 채팅 화면 구성
 elif selected_menu == '채팅하기':
     st.subheader('Chat')
-    st.write('챗봇 대기중')
+    # user_input = st.text_input('채팅을 입력하세요')
+    # if st.button('전송하기', icon='📤'):
+        # st.write(" 당신의 입력:", user_input)
+    NGROK_URL = "https://5217387dab82.ngrok-free.app"
+    st.components.v1.iframe(src=NGROK_URL, height=760, scrolling=True)
+        
 
 ### 설정 화면 (글자크기, 다크모드, 마케팅 동의 등)
 else:
