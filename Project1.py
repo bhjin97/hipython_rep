@@ -10,7 +10,7 @@ from PIL import Image
 st.title('심리상담 서비스 츄러스~미!')
 
 img = Image.open('./data/츄러스미.png')
-album_img = Image.open('./data/new_sample.jpg')
+album_img = Image.open('./data/sample.jpg')
 
 ############################# 랜덤 데이터 생성 ############################
 rng = np.random.default_rng(42)
