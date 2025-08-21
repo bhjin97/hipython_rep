@@ -100,7 +100,7 @@ df = pd.DataFrame(rows, columns=["date", "hour", "minutes"])
 # print(df.groupby('hour')['minutes'].mean().round(1))
 
 #################### 감정분포 데이터 ###################
-np.random.seed(30)
+np.random.seed(11)
 emotions = ["기쁨", "슬픔", "분노", "불안", "놀람", "평온"]
 scores = np.random.randint(3, 10, size=len(emotions))
 df_radar = pd.DataFrame({
