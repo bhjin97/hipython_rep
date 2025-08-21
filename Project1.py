@@ -71,7 +71,6 @@ elif selected_menu == '나의 컨텐츠':
         st.markdown(''' 
                     아티스트
                     ''')
-        st.caption()
         st.button("재생", icon='🎵')
         
 
