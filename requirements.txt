@@ -5,3 +5,4 @@ plotly
 streamlit-folium
 folium
 Pillow
+OpenAI

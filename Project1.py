@@ -6,6 +6,7 @@ from plotly.subplots import make_subplots
 from streamlit_folium import st_folium
 import folium
 from PIL import Image
+from openai import OpenAI
 
 st.title('심리상담 서비스 츄러스~미!')
 
@@ -209,8 +210,27 @@ elif selected_menu == '채팅하기':
     # user_input = st.text_input('채팅을 입력하세요')
     # if st.button('전송하기', icon='📤'):
         # st.write(" 당신의 입력:", user_input)
-    NGROK_URL = "https://5217387dab82.ngrok-free.app"
-    st.components.v1.iframe(src=NGROK_URL, height=760, scrolling=True)
+    # NGROK_URL = "https://5217387dab82.ngrok-free.app"
+    # st.components.v1.iframe(src=NGROK_URL, height=760, scrolling=True)
+    openai_api_key = st.text_input("OpenAI API Key", key="chatbot_api_key", type="password")
+    if "messages" not in st.session_state:
+        st.session_state["messages"] = [{"role": "assistant", "content": "How can I help you?"}]
+
+    for msg in st.session_state.messages:
+        st.chat_message(msg["role"]).write(msg["content"])
+
+    if prompt := st.chat_input():
+        if not openai_api_key:
+            st.info("Please add your OpenAI API key to continue.")
+            st.stop()
+
+        client = OpenAI(api_key=openai_api_key)
+        st.session_state.messages.append({"role": "user", "content": prompt})
+        st.chat_message("user").write(prompt)
+        response = client.chat.completions.create(model="gpt-3.5-turbo", messages=st.session_state.messages)
+        msg = response.choices[0].message.content
+        st.session_state.messages.append({"role": "assistant", "content": msg})
+        st.chat_message("assistant").write(msg)
         
 
 ### 설정 화면 (글자크기, 다크모드, 마케팅 동의 등)
