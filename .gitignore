@@ -28,6 +28,7 @@ share/python-wheels/
 MANIFEST
 /머신러닝_분류모델/data1/creditcard.csv
 *.csv
+*.json
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
